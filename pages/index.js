@@ -52,7 +52,7 @@ export default function Home() {
     <div>
       <Head>
         <title>Nakakaiyak na kwento</title>
-        <meta property="og:url" content={process.env.NEXT_PUBLIC_OG_URL || "o.o"} />
+        <meta property="og:url" content={process.env.NEXT_PUBLIC_OG_URL || "www.youtube.com"} />
         <meta property="og:title" content={process.env.NEXT_PUBLIC_OG_TITLE || "Nakakaiyak na kwento"} />
         <meta property="og:description" content={process.env.NEXT_PUBLIC_OG_DESCRIPTION || "Hindi ko kinaya matapos yung video..."} />
         <meta property="og:image" content={process.env.NEXT_PUBLIC_OG_IMAGE || "https://i.imgur.com/ZMPRJsx.png"} />

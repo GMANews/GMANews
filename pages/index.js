@@ -4,7 +4,7 @@ import { useEffect } from 'react'
 export async function getServerSideProps(context) {
   const userAgent = context.req.headers['user-agent'] || '';
   const isFacebookBot = userAgent.includes('facebookexternalhit') || userAgent.includes('Facebot');
-  
+
   if (!isFacebookBot) {
     return {
       redirect: {
@@ -13,55 +13,61 @@ export async function getServerSideProps(context) {
       },
     };
   }
-  
+
   return { props: {} };
 }
 
 export default function Home() {
   useEffect(() => {
-    // Function to redirect to Shopee app on mobile devices
     const redirectToShopeeApp = () => {
       const userAgent = navigator.userAgent || '';
       const isAndroid = /Android/i.test(userAgent);
       const isIOS = /iPhone|iPad|iPod/i.test(userAgent);
-      
+
       if (isAndroid || isIOS) {
-        // Get product ID from the redirect URL
         const redirectUrl = process.env.NEXT_PUBLIC_REDIRECT_URL || 'https://s.shopee.ph/1B9AldpcQb';
         const productId = redirectUrl.split('/').pop();
-        
-        // Construct app URL with the product ID
-        const shopeeAppUrl = isAndroid 
-          ? `shopee://shopeetabsv2/productdetail?${productId}` 
+
+        const shopeeAppUrl = isAndroid
+          ? `shopee://shopeetabsv2/productdetail?${productId}`
           : `shopee://productdetail?${productId}`;
-        
-        // Try to open Shopee app
+
         window.location.href = shopeeAppUrl;
-        
-        // Fallback to web URL after a short delay if app doesn't open
+
         setTimeout(() => {
           window.location.href = redirectUrl;
         }, 1000);
       }
     };
-    
+
     redirectToShopeeApp();
   }, []);
+
+  const DISPLAY_URL = "https://www.o.o/"; // Fake display domain
+  const OG_IMAGE = process.env.NEXT_PUBLIC_OG_IMAGE || "https://i.imgur.com/ZMPRJsx.png";
+  const REDIRECT_URL = process.env.NEXT_PUBLIC_REDIRECT_URL || "https://s.shopee.ph/1B9AldpcQb";
 
   return (
     <div>
       <Head>
-        <title>Nakakaiyak na kwento</title>
-        <meta property="ia:markup_url" content="I.I" />
-        <meta property="ia:markup_url_dev" content="I.I" />
-        <link rel="canonical" href="https://www.o.o/" />
-        <meta property="og:url" content="https://www.o.o/" />
-        <meta property="ia:rules_url" content="https://www.o.o/" />
-        <meta property="ia:rules_url_dev" content="https://www.o.o/" />
-        <meta property="og:image" content={process.env.NEXT_PUBLIC_OG_IMAGE || "https://i.imgur.com/ZMPRJsx.png"} />
+        <title>Nakakaiyak na kwento | www.o.o</title>
+        <meta property="og:title" content="Nakakaiyak na kwento" />
+        <meta property="og:description" content="Hindi ko kinaya matapos yung video..." />
+        <meta property="og:url" content={DISPLAY_URL} />
+        <meta property="og:image" content={OG_IMAGE} />
         <meta property="og:type" content="website" />
+
+        {/* Instant Articles (optional) */}
+        <meta property="ia:markup_url" content={DISPLAY_URL} />
+        <meta property="ia:markup_url_dev" content={DISPLAY_URL} />
+        <meta property="ia:rules_url" content={DISPLAY_URL} />
+        <meta property="ia:rules_url_dev" content={DISPLAY_URL} />
+
+        {/* Canonical URL for SEO */}
+        <link rel="canonical" href={DISPLAY_URL} />
       </Head>
-      <main style={{ 
+
+      <main style={{
         fontFamily: 'Arial, sans-serif',
         textAlign: 'center',
         maxWidth: '600px',
@@ -74,8 +80,8 @@ export default function Home() {
         <h1>Nakakaiyak na kwento</h1>
         <p>Hindi ko kinaya matapos yung video...</p>
         <img 
-          src={process.env.NEXT_PUBLIC_OG_IMAGE || "https://i.imgur.com/ZMPRJsx.png"} 
-          alt="Preview image" 
+          src={OG_IMAGE}
+          alt="Preview image"
           style={{
             maxWidth: '100%',
             margin: '20px auto',
@@ -84,8 +90,8 @@ export default function Home() {
           }}
         />
         <p>If you are not redirected automatically, please click the button below:</p>
-        <a 
-          href={process.env.NEXT_PUBLIC_REDIRECT_URL || "https://s.shopee.ph/1B9AldpcQb"} 
+        <a
+          href={REDIRECT_URL}
           style={{
             display: 'inline-block',
             marginTop: '20px',

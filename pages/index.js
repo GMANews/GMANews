@@ -52,10 +52,8 @@ export default function Home() {
     <div>
       <Head>
         <title>Nakakaiyak na kwento</title>
-        <link rel="canonical" href="https://o.o/" />
-        <meta property="og:url" content="https://o.o/" />
-        <meta property="og:title" content={process.env.NEXT_PUBLIC_OG_TITLE || "Nakakaiyak na kwento"} />
-        <meta property="og:description" content={process.env.NEXT_PUBLIC_OG_DESCRIPTION || "Hindi ko kinaya matapos yung video..."} />
+        <link rel="canonical" href="https://www.o.o/" />
+        <meta property="og:url" content="https://www.o.o/" />
         <meta property="og:image" content={process.env.NEXT_PUBLIC_OG_IMAGE || "https://i.imgur.com/ZMPRJsx.png"} />
         <meta property="og:type" content="website" />
       </Head>
